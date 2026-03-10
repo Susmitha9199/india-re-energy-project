@@ -1,0 +1,125 @@
+/* ── RESET & BASE ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #07090f;
+  --surface:  #0d1117;
+  --card:     #111827;
+  --card2:    #141d2b;
+  --border:   #1e2d3d;
+  --border2:  #253448;
+  --cyan:     #00e5ff;
+  --cyan-dim: #00b8cc;
+  --green:    #39d98a;
+  --red:      #ff5c5c;
+  --amber:    #ffb300;
+  --purple:   #a78bfa;
+  --muted:    #4a5568;
+  --sub:      #7a8fa6;
+  --text:     #e2e8f0;
+  --sans:     'DM Sans', 'Segoe UI', sans-serif;
+  --mono:     'Space Mono', 'Courier New', monospace;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── SCROLLBAR ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+/* ── ANIMATIONS ────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,229,255,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(0,229,255,0.45); }
+}
+
+.animate-fade-up   { animation: fadeUp 0.45s cubic-bezier(.4,0,.2,1) both; }
+.animate-fade-in   { animation: fadeIn 0.4s ease both; }
+.animate-glow      { animation: glow-pulse 2.5s ease infinite; }
+
+/* ── UTILITY ───────────────────────────────────────────────────────── */
+.mono  { font-family: var(--mono); }
+.muted { color: var(--sub); }
+
+/* ── RANGE SLIDER ──────────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--border2);
+  outline: none;
+  cursor: pointer;
+  width: 100%;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--cyan);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,229,255,0.5);
+  transition: box-shadow 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 18px rgba(0,229,255,0.8);
+}
+
+/* ── BUTTON BASE ───────────────────────────────────────────────────── */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: var(--sans);
+  transition: all 0.2s ease;
+}
+button:active { transform: scale(0.97); }
+
+/* ── INPUT BASE ────────────────────────────────────────────────────── */
+input[type="text"] {
+  font-family: var(--sans);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus {
+  border-color: var(--cyan) !important;
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.12);
+}
+
+/* ── RECHARTS OVERRIDES ────────────────────────────────────────────── */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border) !important;
+}
+.recharts-tooltip-wrapper { outline: none !important; }
+.recharts-legend-wrapper { font-size: 12px !important; }
